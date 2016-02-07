@@ -4,7 +4,6 @@ public class Solution {
             return 1;
 
         int[][] result = new int[m][n];
-
         for(int i = 1; i < n; i++) {
             result[0][i] = 1;
         }
