@@ -10,16 +10,13 @@ public class Solution {
         while(n != 1) {
             n = next(n);
             if(!set.add(n)) {
-                break;
+                return false;
             } else {
                 set.add(n);
             }
         }
 
-        if(n == 1)
-            return true;
-
-        return false;
+        return true;
     }
 
     private int next(int n) {
