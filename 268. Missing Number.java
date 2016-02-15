@@ -32,3 +32,18 @@ public class Solution {
         return xor ^ i;
     }
 }
+
+//version 4
+public class Solution {
+    public int missingNumber(int[] nums) {
+        int xor = 0;
+        for(int i = 0; i <= nums.length; i++) {
+            xor ^= i;
+        }
+
+        for(int value : nums) {
+            xor ^= value;
+        }
+        return xor;
+    }
+}
