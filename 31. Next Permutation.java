@@ -1,43 +1,57 @@
+/*
+ *
+ *
+ *
+ *
+ */
 public class Solution {
     public void nextPermutation(int[] nums) {
-        if(nums == null || nums.length == 1)
+        if(nums == null || nums.length == 1){
             return;
-
-        int index = 0, first = 0, second = 0, third = 0;
-        for(int i = nums.length - 1; i > 0; i--) {
-            if(nums[i] > nums[i - 1]) {
+        }
+        
+        int length = nums.length, first = -1, second = 0, third = 0;
+        for(int i = length - 1; i > 0; i--) {
+            if(nums[i] > nums[i-1]) {
                 first = i - 1;
                 second = i;
                 break;
             }
         }
-
-        for(int i = nums.length - 1; i > first; i--) {
+        
+        if(first == -1) { // if first == -1, this sequence is the last one, reverse all
+            reverse(nums, first + 1, length-1);
+            return;
+        }
+        
+        // find the element that is greater than first
+        for(int i = length - 1; i > first; i--){
             if(nums[i] > nums[first]) {
                 third = i;
                 break;
             }
         }
 
-        int temp = nums[third];
-        nums[third] = nums[first];
-        nums[first] = temp;
-
-        reverse(nums, second, nums.length - 1);
-
-
+        // swap two elements
+        swap(nums, first, third);
+        
+        // reverse the following elements;
+        reverse(nums, second, length - 1);
     }
-
-    public void reverse(int[] nums, int i, int j) {
-        if(i > j)
-            return;
-
-        while(i < j) {
-            int temp = nums[j];
-            nums[j] = nums[i];
-            nums[i] = temp;
-            i++;
-            j--;
+    
+    // swap array at index iIndex and jIndex
+    public void swap(int[] nums, int iIndex, int jIndex){
+        int temp = nums[iIndex];
+        nums[iIndex] = nums[jIndex];
+        nums[jIndex] = temp;
+    }
+    
+    // reverse array from startIndex to endIndex
+    public void reverse(int[] nums, int startIndex, int endIndex){
+        while(startIndex < endIndex) {
+            swap(nums, startIndex, endIndex);
+            startIndex++;
+            endIndex--;
         }
     }
 }
